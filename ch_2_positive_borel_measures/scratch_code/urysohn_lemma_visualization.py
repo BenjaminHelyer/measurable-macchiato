@@ -13,6 +13,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from scipy.spatial.distance import cdist
+import os
 
 
 def urysohn_function_vectorized(X, Y, set_A, set_B):
@@ -162,8 +163,13 @@ def main():
     print("Generating Urysohn's Lemma visualization...")
     fig = visualize_urysohn_lemma()
     
+    # Create scratch_results directory if it doesn't exist
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_dir = os.path.join(script_dir, 'scratch_results')
+    os.makedirs(output_dir, exist_ok=True)
+    
     # Save the figure
-    output_path = 'urysohn_lemma_visualization.png'
+    output_path = os.path.join(output_dir, 'urysohn_lemma_visualization.png')
     fig.savefig(output_path, dpi=300, bbox_inches='tight')
     print(f"Visualization saved to {output_path}")
     
